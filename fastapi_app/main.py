@@ -48,10 +48,13 @@ async def login_page(request:Request):
 
 @app.post("/login")
 async def login(request: Request, username:str = Form(...), password: str = Form(...)):
+    print("intento de login:" username, password)
     if username in user and user[username] == password:
+        print("Login exitoso")
         response = RedirectResponse(url='/dashboard', status_code=302)
         response.set_cookie(key="Authorization", value="Bearer Token", httponly=True)
         return response
+    print("login fallido")
     return templates.TemplateResponse("login.html",{"request":request, "error":"Invalid username and password"})
 
 
