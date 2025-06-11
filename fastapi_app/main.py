@@ -48,7 +48,7 @@ async def login_page(request:Request):
 
 @app.post("/login")
 async def login(request: Request, username:str = Form(...), password: str = Form(...)):
-    print("intento de login:" username, password)
+    print("Intento de login:", username, password)
     if username in user and user[username] == password:
         print("Login exitoso")
         response = RedirectResponse(url='/dashboard', status_code=302)
