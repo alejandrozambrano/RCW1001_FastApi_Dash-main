@@ -36,7 +36,7 @@ app.mount("/dashboard", WSGIMiddleware(app_dash.server))
 
 user={"admin":"123"}
 
-EXTERNAL_API_URL = "htpp://127.0.0.1:8000/info"
+EXTERNAL_API_URL = "http://127.0.0.1:8000/info"
 
 def get_external_info():
     try:
@@ -56,7 +56,8 @@ def get_external_info():
 
 @app.get("/")
 async def home_page(request:Request):
-    return templates.TemplateResponse('home.html', {"request":request})
+    information = get_external_info()
+    return templates.TemplateResponse('home.html', {"request":request, "info":information})
 
 
 @app.get("/login")
